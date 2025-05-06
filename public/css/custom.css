@@ -1,0 +1,82 @@
+/* public/css/custom.css */
+
+body {
+    background: linear-gradient(135deg, #2c003e, #000428);
+    color: #e0e0e0;
+  }
+
+  h2, h3, h5 {
+    color: #f1c40f;
+    text-shadow: 0 0 8px rgba(241,196,15,0.7);
+  }
+
+  .btn-primary {
+    background-color: #5c16c5;
+    border-color: #5c16c5;
+    box-shadow: 0 0 10px rgba(92,22,197,0.7);
+  }
+
+  .btn-primary:hover {
+    background-color: #7a3fd6;
+    border-color: #7a3fd6;
+    box-shadow: 0 0 12px rgba(122,63,214,0.9);
+  }
+
+  .card {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(241,196,15,0.3);
+  }
+
+  .card-body {
+    backdrop-filter: blur(5px);
+  }
+
+  footer {
+    font-size: 0.9rem;
+    color: #b0b0b0;
+  }
+
+/* ini csss buat label login screeennya, karna warna latarnya gelap jadi kita atur agar warna tulisannya bisa kebaca disini */
+/* Buat placeholder di login form jadi warna emas */
+.login-form .form-control::placeholder {
+    color: #f1c40f !important;
+    opacity: 1; /* pastikan opasitas full supaya jelas terlihat */
+}
+
+  /* Untuk kompatibilitas lebih luas */
+.login-form .form-control:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #f1c40f !important;
+}
+.login-form .form-control::-ms-input-placeholder { /* Microsoft Edge */
+    color: #f1c40f !important;
+}
+.login-form .form-control {
+    color: #f1c40f !important;
+}
+.login-form .form-label {
+    color: #f1c40f !important;
+}
+
+
+
+/* Tombol “mahou shoten no tobira o shimeru” */
+.btn-magical {
+  background: linear-gradient(45deg, #7a3fd6, #f1c40f);
+  border: none;
+  color: #1f1b2d;
+  box-shadow: 0 0 10px rgba(122,63,214,0.7), 0 0 10px rgba(241,196,15,0.7);
+  transition: all 0.3s ease;
+}
+.btn-magical {
+    background: linear-gradient(45deg, #7a3fd6, #f1c40f);
+    border: none;
+    color: #1f1b2d;
+    box-shadow: 0 0 10px rgba(122,63,214,0.7), 0 0 10px rgba(241,196,15,0.7);
+    transition: all 0.3s ease;
+}
+.btn-magical:hover {
+  background: linear-gradient(45deg, #f1c40f, #7a3fd6);
+  box-shadow: 0 0 15px rgba(241,196,15,1), 0 0 15px rgba(122,63,214,1);
+  transform: scale(1.05);
+}
+
