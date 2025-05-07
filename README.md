@@ -43,29 +43,33 @@ Seluruh fitur diimplementasikan tanpa basis data: buku disimpan di _session_ PHP
 
 ---
 
-## Struktur Proyek
-app/
-└─ Http/
-└─ Controllers/
-└─ PageController.php
-public/
-└─ css/
-└─ custom.css
-resources/
-└─ views/
-├─ layouts/
-│ ├─ guest.blade.php
-│ └─ app.blade.php
-├─ components/
-│ ├─ navbar.blade.php
-│ └─ footer.blade.php
-├─ login.blade.php
-├─ splash.blade.php
-├─ dashboard.blade.php
-├─ pengelolaan.blade.php
-└─ profile.blade.php
-routes/
-└─ web.php
+## 📂 Struktur Proyek
+
+```text
+📦 Pweb_AliSamudra_232410103048
+├── app
+│   └── Http
+│       └── Controllers
+│           └── PageController.php
+├── public
+│   └── css
+│       └── custom.css
+├── resources
+│   └── views
+│       ├── layouts
+│       │   ├── app.blade.php
+│       │   └── guest.blade.php
+│       ├── components
+│       │   ├── navbar.blade.php
+│       │   └── footer.blade.php
+│       ├── login.blade.php
+│       ├── splash.blade.php
+│       ├── dashboard.blade.php
+│       ├── pengelolaan.blade.php
+│       └── profile.blade.php
+└── routes
+    └── web.php
+
 
 ## 🔄 Alur Aplikasi
 1. **Login** (`/login`) → isi `username`/`password` → `POST /login`  
