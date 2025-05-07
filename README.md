@@ -86,11 +86,11 @@ Seluruh fitur diimplementasikan tanpa basis data: buku disimpan di _session_ PHP
   - `Route::get()`, `Route::post()`, `Route::redirect()` untuk mendefinisikan alur halaman.  
 - **Controller** (`PageController.php`):  
   - Mengambil `username` lewat `$request->query('username')`.  
-  - Simulasi CRUD menyimpan & membaca daftar buku melalui `session()->put()` dan `session()->get()`.  
+  - Simulasi CRD menyimpan & membaca daftar buku melalui `session()->put()` dan `session()->get()`.  
 - **Blade Layout**:  
   - `layouts.guest` untuk halaman **Login** & **Splash** (tanpa navbar).  
   - `layouts.app` untuk halaman utama (dengan `<x-navbar>` & `<x-footer>`).  
-- **Session-based CRUD**:  
+- **Session-based CRD**:  
   - Default 30 buku diisi lewat `defaultBooks()`.  
   - Fungsi **createBook()** dan **deleteBook()** memodifikasi data di _session_ agar perubahan persist selama sesi.  
 - **CSS Kustom** (`public/css/custom.css`):  
