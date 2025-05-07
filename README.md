@@ -1,66 +1,95 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# UTS Pemrograman Web – Magical Library
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Deskripsi Singkat
+**Magical Library** adalah aplikasi web sederhana berbasis Laravel 10 yang mensimulasikan sebuah “toko buku sihir”. Pengguna dapat:
+- **Login** (siapa saja bisa masuk)
+- **Splash screen** dengan sapaan “Okairi nasai…”
+- **Dashboard** menyambut penyihir
+- **Pengelolaan Buku Sihir**: menambahkan dan menghapus (simulasi CRUD menggunakan session)
+- **Profil Penyihir**: menampilkan nama, entitas, asal planet, dan satu foto acak dari daftar
 
-## About Laravel
+Seluruh fitur diimplementasikan tanpa basis data: buku disimpan di _session_ PHP, foto diambil secara acak dari koleksi URL.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Fitur Utama
+1. **Login Sihir**  
+   - Form dengan `username` & `password` (kosongkan saja), selalu berhasil.
+2. **Splash Screen**  
+   - Menampilkan “Okairi nasai, \<username\>…” selama 3 detik, lalu otomatis ke Dashboard.
+3. **Dashboard**  
+   - Menyambut penyihir dengan nama.
+4. **Pengelolaan Buku Sihir**  
+   - Tabel/kartu 30 buku awal (hard-code).  
+   - _Add book_: menambah entri baru ke session (ID unik).  
+   - _Delete book_: menghapus entri dari session.  
+5. **Profile Penyihir**  
+   - Menampilkan nama, entitas “Manusia”, planet “Bumi”, dan satu foto acak dari daftar link.
+6. **Logout**  
+   - Tombol “Mahou Shoten no Tobira o Shimeru” mengembalikan ke halaman Login.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## Teknologi & Library
+- **Framework**: Laravel 10  
+- **Template Engine**: Blade  
+- **Styling**: Bootstrap 5 + CSS kustom (`public/css/custom.css`)  
+- **Session**: PHP Session untuk menyimpan daftar buku  
+- **Query Parameter**: `?username=…` menjaga username antar-halaman  
+- **Komponen Blade**:  
+  - `@extends`, `@section` / `@endsection`, `@yield`  
+  - `@include` dan `<x-navbar>`, `<x-footer>` untuk layout master  
+  - `@push('scripts')` / `@stack('scripts')` untuk splash JS
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Struktur Proyek
+app/
+└─ Http/
+└─ Controllers/
+└─ PageController.php
+public/
+└─ css/
+└─ custom.css
+resources/
+└─ views/
+├─ layouts/
+│ ├─ guest.blade.php
+│ └─ app.blade.php
+├─ components/
+│ ├─ navbar.blade.php
+│ └─ footer.blade.php
+├─ login.blade.php
+├─ splash.blade.php
+├─ dashboard.blade.php
+├─ pengelolaan.blade.php
+└─ profile.blade.php
+routes/
+└─ web.php
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🔄 Alur Aplikasi
+1. **Login** (`/login`) → isi `username`/`password` → `POST /login`  
+2. **Splash Screen** (`/splash?username=…`) → tampil sapaan “Okairi nasai…” → JS `setTimeout` 3 detik  
+3. **Dashboard** (`/dashboard?username=…`) → tampil sambutan & navbar  
+4. **Pengelolaan Buku** (`/pengelolaan?username=…`) → simpan & manipulasi array `books` di _session_  
+5. **Profile** (`/profile?username=…`) → tampil detail profil & satu foto acak  
+6. **Logout** (`POST /logout`) → kembali ke `/login`
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## 🛠️ Penjelasan Teknis
+- **Routing** (`routes/web.php`):  
+  - `Route::get()`, `Route::post()`, `Route::redirect()` untuk mendefinisikan alur halaman.  
+- **Controller** (`PageController.php`):  
+  - Mengambil `username` lewat `$request->query('username')`.  
+  - Simulasi CRUD menyimpan & membaca daftar buku melalui `session()->put()` dan `session()->get()`.  
+- **Blade Layout**:  
+  - `layouts.guest` untuk halaman **Login** & **Splash** (tanpa navbar).  
+  - `layouts.app` untuk halaman utama (dengan `<x-navbar>` & `<x-footer>`).  
+- **Session-based CRUD**:  
+  - Default 30 buku diisi lewat `defaultBooks()`.  
+  - Fungsi **createBook()** dan **deleteBook()** memodifikasi data di _session_ agar perubahan persist selama sesi.  
+- **CSS Kustom** (`public/css/custom.css`):  
+  - Latar gradien, font *Cinzel*, `text-shadow` kuning keemasan.  
+  - Placeholder form login diwarnai emas (`#f1c40f`) agar kontras dengan tema gelap.  
 
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
