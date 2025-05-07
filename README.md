@@ -5,7 +5,7 @@
 - **Login** (siapa saja bisa masuk)
 - **Splash screen** dengan sapaan “Okairi nasai…”
 - **Dashboard** menyambut penyihir
-- **Pengelolaan Buku Sihir**: menambahkan dan menghapus (simulasi CRUD menggunakan session)
+- **Pengelolaan Buku Sihir**: menambahkan dan menghapus (simulasi CRD menggunakan session)
 - **Profil Penyihir**: menampilkan nama, entitas, asal planet, dan satu foto acak dari daftar
 
 Seluruh fitur diimplementasikan tanpa basis data: buku disimpan di _session_ PHP, foto diambil secara acak dari koleksi URL.
